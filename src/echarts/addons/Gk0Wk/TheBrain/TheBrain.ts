@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import type { IParseTreeNode } from 'tiddlywiki';
 import type { IScriptAddon } from '../../../scriptAddon';
-import addon from '../TagCloud/TagCloud';
 
 const colors = [
   '#5470c6',
@@ -219,6 +218,7 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
       zoom?: string;
       draggable?: string;
       toolbox?: string;
+      legend?: string;
     },
   ) => {
     /** 参数：focussedTiddler 是图的中央节点 */
@@ -624,6 +624,7 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
       backgroundColor: 'transparent',
       legend: [
         {
+          show: addonAttributes.legend === 'yes' ? true : false,
           data: (ifChinese ? CategoriesZh : CategoriesEn).map(a => {
             return a.name;
           }),
@@ -646,22 +647,27 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
         },
       },
       tooltip: {
-        position: 'top',
-        formatter: cachedTooltipFormatter,
-        triggerOn: previewDelay >= 0 ? 'mousemove' : 'none',
-        enterable: true,
-        showDelay: Math.max(0, previewDelay),
-        hideDelay: 200,
-        confine: true,
-        textStyle: {
-          color: 'inherit',
-          fontFamily: 'inherit',
-          fontSize: 'inherit',
-        },
-        appendToBody: true,
-        backgroundColor: getPlatteColor('page-background'),
-        borderColor: getPlatteColor('very-muted-foreground'),
+        formatter: `{b}`,
       },
+      // tooltip: {
+      //   position: 'top',
+      //   formatter: cachedTooltipFormatter,
+      //   triggerOn: previewDelay >= 0 ? 'mousemove' : 'none',
+      //   enterable: true,
+      //   showDelay: Math.max(0, previewDelay),
+      //   hideDelay: 200,
+      //   confine: true,
+      //   textStyle: {
+      //     color: 'inherit',
+      //     fontFamily: 'inherit',
+      //     fontSize: 'inherit',
+      //   },
+      //   appendToBody: true,
+      //   backgroundColor: getPlatteColor('page-background'),
+      //   borderColor: getPlatteColor('very-muted-foreground'),
+      // },
+      animationDurationUpdate: 300,
+      animationEasingUpdate: 'quinticInut',
       series: [
         {
           name: graphTitle,
@@ -710,7 +716,7 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
           emphasis: {
             disabled: !focusBlur,
             focus: 'adjacency',
-            scale: 1.2,
+            scale: 1.25,
           },
           blur: {
             itemStyle: { opacity: 0.3 },
