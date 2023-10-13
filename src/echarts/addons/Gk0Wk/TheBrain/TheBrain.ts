@@ -114,7 +114,7 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
       new $tw.Story().navigateTiddler(event.data.name);
     });
     // 缩放检测
-    let fontScale = 4;
+    let fontScale = 1;
     let originTriggerOn: string | undefined;
     let originShowDelay: number | undefined;
     const timer = setInterval(() => {
@@ -227,12 +227,16 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
       for (const title of $tw.wiki.filterTiddlers(
         addonAttributes.focussedTiddler,
       )) {
-        focussedTiddlers.add(title);
+
+        if (title.startsWith('Draft')) return;
+         focussedTiddlers.add(title);
       }
     } else {
+      // BUG: 如果固定在pagetemplate上 新建tiddler, 会同时产生 Draft of 'xxx' by author 多个focussedTiddler, 难道是单引号的问题
       const t = $tw.wiki.getTiddlerText('$:/temp/focussedTiddler');
       if (t) {
-        focussedTiddlers.add(t);
+        if (t.startsWith('Draft')) return;
+          focussedTiddlers.add(t);
       }
     }
     if (focussedTiddlers.size === 0) {
@@ -613,7 +617,8 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
 
     let zoom = Number(addonAttributes.zoom);
     if (Number.isNaN(zoom) || Number.isFinite(zoom) || zoom <= 0) {
-      zoom = 4;
+      // BUG: zoom param not work
+      zoom = 2;
     }
     let previewDelay = Number(addonAttributes.previewDelay || '1000');
     if (!Number.isSafeInteger(previewDelay)) {

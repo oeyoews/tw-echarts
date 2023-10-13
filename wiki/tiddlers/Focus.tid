@@ -1,10 +1,10 @@
 caption: Focus
 created: 20211220184056323
 creator: Sttot
-modified: 20230922171650939
+modified: 20231013115938872
 modifier: Sttot
 tags: $:/tags/SideBar
 title: Focus
 type: text/vnd.tiddlywiki
 
-<$echarts $tiddler="$:/plugins/Gk0Wk/echarts/addons/TheBrain.js" />
+<$echarts $tiddler="$:/plugins/Gk0Wk/echarts/addons/TheBrain.js" zoom=4/>
