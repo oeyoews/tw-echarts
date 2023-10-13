@@ -219,6 +219,7 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
       draggable?: string;
       toolbox?: string;
       legend?: string;
+      scale?: string;
     },
   ) => {
     /** 参数：focussedTiddler 是图的中央节点 */
@@ -298,14 +299,14 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
           fontSize: '15px',
         },
         symbol: findIcon(focussedTiddler),
-        symbolSize: 15,
+        symbolSize: 10,
         select: {
           disabled: true,
         },
         itemStyle: {
           opacity: 1,
-          borderColor: `${colors[0]}66`,
-          borderWidth: 15,
+          // borderColor: `${colors[0]}66`,
+          // borderWidth: 15,
         },
         isTag: false,
         tooltip: {
@@ -687,7 +688,7 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
           nodes,
           edges,
           categories: ifChinese ? CategoriesZh : CategoriesEn,
-          roam: true,
+          roam: addonAttributes.scale === 'yes' ? true : false,
           draggable: addonAttributes.draggable === 'yes' ? true : false,
           zoom,
           label: {
