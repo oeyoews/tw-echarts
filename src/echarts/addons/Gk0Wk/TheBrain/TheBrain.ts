@@ -2,6 +2,7 @@
 import type { IParseTreeNode } from 'tiddlywiki';
 import type { IScriptAddon } from '../../../scriptAddon';
 
+// TODO: legend 默认只显示几个不显示全部, 暴露出参数配置
 const colors = [
   '#5470c6',
   '#91cc75',
