@@ -3,6 +3,8 @@ import type { IParseTreeNode } from 'tiddlywiki';
 import type { IScriptAddon } from '../../../scriptAddon';
 
 // TODO: legend 默认只显示几个不显示全部, 暴露出参数配置
+// TODO: 默认显示caption: 因为此时已经缩放了, 不会很大
+// TODO: 判断路径数如果超过10，则不显示, 可以用来index
 const colors = [
   '#5470c6',
   '#91cc75',
