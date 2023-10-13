@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 import type { IParseTreeNode } from 'tiddlywiki';
 import type { IScriptAddon } from '../../../scriptAddon';
+import addon from '../TagCloud/TagCloud';
 
 const colors = [
   '#5470c6',
@@ -47,6 +48,7 @@ const attributes = new Set<string>([
   'focusBlur',
   'previewTemplate',
   'zoom',
+  'draggable'
 ]);
 const getPlatteColor = (name: string) =>
   $tw.wiki.renderText(
@@ -215,6 +217,8 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
       focusBlur?: string;
       previewTemplate?: string;
       zoom?: string;
+      draggable?: string;
+      toolbox?: string;
     },
   ) => {
     /** 参数：focussedTiddler 是图的中央节点 */
@@ -633,7 +637,7 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
         left: 'right',
       },
       toolbox: {
-        show: true,
+        show: addonAttributes.toolbox === 'yes' ? true : false,
         left: 0,
         bottom: 0,
         feature: {
@@ -673,7 +677,7 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
           edges,
           categories: ifChinese ? CategoriesZh : CategoriesEn,
           roam: true,
-          draggable: false,
+          draggable: addonAttributes.draggable === 'yes' ? true : false,
           zoom,
           label: {
             position: 'right',
