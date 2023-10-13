@@ -198,6 +198,7 @@ class EChartsWidget extends Widget {
       this.containerDom.style.fontSize = '12px';
     }
     const mediaQuery = window.matchMedia?.('(prefers-color-scheme: dark)');
+    // TODO: 如果可以检测$:/palette条目的变化, rebuildInstance
     if (this.theme === 'auto') {
     mediaQuery.addEventListener('change', () => {
       this.theme = mediaQuery.matches ? 'dark' : 'light';
@@ -207,6 +208,18 @@ class EChartsWidget extends Widget {
   }
 
   refresh(changedTiddlers: IChangedTiddlers) {
+    // TODO 如何获得theme的初始固定值, 只有在auto的时候自动刷新
+    // TODO 如何获取tw内是dark/ligh, 而不是跟随系统主题, 可以借助localstorage.themm(tw官方不支持)
+    // const haspaletteChanged = Object.keys(changedTiddlers).includes('$:/palette')
+    // if (haspaletteChanged) {
+    //   const systemMode = $tw.wiki.getTiddlerText('$:/info/darkmode') === 'yes' ? "dark" : undefined;
+    //   this.theme = localStorage.theme === 'system'
+    //     ? systemMode
+    //     : localStorage.theme
+    //     || systemMode;
+    //   this.refreshSelf();
+    //   return true;
+    // }
     // 去抖
     if (this.timer) {
       clearTimeout(this.timer);
