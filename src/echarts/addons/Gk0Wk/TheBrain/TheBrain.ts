@@ -5,6 +5,7 @@ import type { IScriptAddon } from '../../../scriptAddon';
 // TODO: legend 默认只显示几个不显示全部, 暴露出参数配置
 // TODO: 默认显示caption: 因为此时已经缩放了, 不会很大
 // TODO: 判断路径数如果超过10，则不显示, 可以用来index
+// TODO: findicon 支持svg, iconify
 const colors = [
   '#5470c6',
   '#91cc75',
@@ -180,7 +181,7 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
     return {
       historyTiddlers: [],
       viewingTiddlers: new Set(),
-      focusing: attributes.focussedTiddler,
+      focusing: attributes.focussedTiddler = 'GettingStarted',
       unmount: () => {
         clearInterval(timer);
       },
@@ -244,6 +245,8 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
       }
     }
     if (focussedTiddlers.size === 0) {
+      // TODO: not working
+      // focussedTiddlers.add('GettingStarted')
       return;
     }
     // draft
