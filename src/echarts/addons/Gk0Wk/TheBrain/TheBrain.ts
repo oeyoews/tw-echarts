@@ -6,6 +6,7 @@ import type { IScriptAddon } from '../../../scriptAddon';
 // TODO: 默认显示caption: 因为此时已经缩放了, 不会很大
 // TODO: 判断路径数如果超过10，则不显示, 可以用来index
 // TODO: findicon 支持svg, iconify
+// TODO: 写一个 layout: none https://echarts.apache.org/examples/en/editor.html?c=graph-label-overlap
 const colors = [
   '#5470c6',
   '#91cc75',
@@ -181,7 +182,7 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
     return {
       historyTiddlers: [],
       viewingTiddlers: new Set(),
-      focusing: attributes.focussedTiddler = 'GettingStarted',
+      focusing: attributes.focussedTiddler,
       unmount: () => {
         clearInterval(timer);
       },
@@ -683,6 +684,10 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
       series: [
         {
           name: graphTitle,
+          scaleLimit: {
+          min: 2,
+          max: 8
+        },
           type: 'graph',
           layout: 'force',
           top: 0,
