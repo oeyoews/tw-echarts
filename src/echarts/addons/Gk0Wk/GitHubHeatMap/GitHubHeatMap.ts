@@ -151,7 +151,7 @@ const GitHubHeatMapAddon: IScriptAddon<any> = {
           : `Produced ${total} tiddlers this year`,
       },
       tooltip: {
-        position: 'top',
+        // position: 'top',
         // formatter: cachedTooltipFormatter,
         formatter: (params: any) => {
           const { value: data } = params;

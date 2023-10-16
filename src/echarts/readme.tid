@@ -22,4 +22,5 @@ The plugin description and tutorial is long, please refer to https://tiddly-gitt
 </$list>
 </$list>
 
-[img[$:/plugins/Gk0Wk/echarts/banner]]
+<!-- use cdn -->
+<!-- [img[$:/plugins/Gk0Wk/echarts/banner]] -->
