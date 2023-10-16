@@ -2,7 +2,6 @@ import type { SourceIterator } from 'tiddlywiki';
 import { IScriptAddon } from '../../../scriptAddon';
 import * as ECharts from '$:/plugins/Gk0Wk/echarts/echarts.min.js';
 
-// TODO: add click
 const getFilterByDate = (date: string) =>
   `[sameday:created[${date}]] [sameday:modified[${date}]]`;
 const yearDates: Map<number, [string, string][]> = new Map();
@@ -144,15 +143,12 @@ const GitHubHeatMapAddon: IScriptAddon<any> = {
     switch (addonAttributes.$theme) {
       case 'auto':
         darkMode = systemmode;
-        console.log(darkMode, 'auto');
         break;
       case 'dark':
         darkMode = true;
-        console.log(darkMode, 'dark');
         break;
       default:
         darkMode = false;
-        console.log(darkMode, 'default');
     }
     const chinese = checkIfChinese();
     myChart.setOption({
@@ -236,6 +232,26 @@ const GitHubHeatMapAddon: IScriptAddon<any> = {
         itemStyle: { borderRadius: 3 },
       },
     } as any);
+
+    const gotoList = (params: any) => {
+      const { value: data } = params;
+      const [date, value] = data;
+      const formattedDate = date.replace(/-/g, '');
+      if (!value) return;
+      const goto = new $tw.Story();
+      const filter = `[sameday:created[${formattedDate}]!is[system]!has[draft.of]]`;
+      // @ts-ignore
+      $tw.rootWidget.invokeActionString(
+        '<$action-setfield $tiddler="$:/temp/advancedsearch" text="""' +
+          filter +
+          '"""/><$action-setfield $tiddler="$:/temp/advancedsearch/input" text="""' +
+          filter +
+          '"""/><$action-setfield $tiddler="$:/temp/advancedsearch/refresh" text="yes"/><$action-setfield $tiddler="$:/state/tab--1498284803" text="$:/core/ui/AdvancedSearch/Filter"/>',
+      );
+      goto.navigateTiddler('$:/AdvancedSearch');
+    };
+
+    myChart.on('click', 'series', gotoList);
   },
 };
 
