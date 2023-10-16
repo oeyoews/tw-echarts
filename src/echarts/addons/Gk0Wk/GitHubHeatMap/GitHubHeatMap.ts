@@ -2,6 +2,7 @@ import type { SourceIterator } from 'tiddlywiki';
 import { IScriptAddon } from '../../../scriptAddon';
 import * as ECharts from '$:/plugins/Gk0Wk/echarts/echarts.min.js';
 
+// TODO: add click
 const getFilterByDate = (date: string) =>
   `[sameday:created[${date}]] [sameday:modified[${date}]]`;
 const yearDates: Map<number, [string, string][]> = new Map();
@@ -57,7 +58,12 @@ const checkIfDarkMode = () =>
   ] === 'dark';
 
 const GitHubHeatMapAddon: IScriptAddon<any> = {
-  shouldUpdate: (_, changedTiddlers) => $tw.utils.count(changedTiddlers) > 0,
+  shouldUpdate: (_, changedTiddlers) => {
+    const filteredChangedTiddlers = Object.keys(changedTiddlers).filter(
+      title => !(title.startsWith('$:/') || title.startsWith('Draft of')),
+    );
+    return filteredChangedTiddlers.length ? true : false;
+  },
   onUpdate: (myChart, _state, addonAttributes) => {
     const year = parseInt(addonAttributes.year, 10) || new Date().getFullYear();
     const subfilter =
@@ -132,7 +138,9 @@ const GitHubHeatMapAddon: IScriptAddon<any> = {
       }
       return cache;
     };
-    const darkMode = checkIfDarkMode();
+    // const darkMode = checkIfDarkMode();
+    const darkMode =
+      $tw.wiki.getTiddlerText('$:/info/darkmode') === 'yes' ? true : false;
     const chinese = checkIfChinese();
     myChart.setOption({
       title: {
@@ -144,12 +152,20 @@ const GitHubHeatMapAddon: IScriptAddon<any> = {
       },
       tooltip: {
         position: 'top',
-        formatter: cachedTooltipFormatter,
+        // formatter: cachedTooltipFormatter,
+        formatter: (params: any) => {
+          const { value: data } = params;
+          const [date, count] = data;
+          return count ? `${date} 新增了 ${count} 个条目` : `无新增条目`;
+        },
         triggerOn: 'mousemove|click',
         enterable: true,
         hideDelay: 800,
-        backgroundColor: getPlatteColor('page-background'),
-        borderColor: getPlatteColor('very-muted-foreground'),
+        backgroundColor: darkMode
+          ? '#282828'
+          : getPlatteColor('page-background'),
+        // borderColor: getPlatteColor('very-muted-foreground'),
+        borderWidth: 0,
       },
       visualMap: {
         type: 'piecewise',
@@ -179,6 +195,7 @@ const GitHubHeatMapAddon: IScriptAddon<any> = {
           borderCap: 'round',
           borderJoin: 'round',
           borderColor: getPlatteColor('background'),
+          // borderColor: 'transparent',
         },
         splitLine: {
           show: false,
@@ -203,6 +220,7 @@ const GitHubHeatMapAddon: IScriptAddon<any> = {
         coordinateSystem: 'calendar',
         calendarIndex: 0,
         data,
+        itemStyle: { borderRadius: 3 },
       },
     } as any);
   },
