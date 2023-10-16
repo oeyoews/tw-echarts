@@ -138,9 +138,22 @@ const GitHubHeatMapAddon: IScriptAddon<any> = {
       }
       return cache;
     };
-    // const darkMode = checkIfDarkMode();
-    const darkMode =
+    const systemmode =
       $tw.wiki.getTiddlerText('$:/info/darkmode') === 'yes' ? true : false;
+    let darkMode: boolean;
+    switch (addonAttributes.$theme) {
+      case 'auto':
+        darkMode = systemmode;
+        console.log(darkMode, 'auto');
+        break;
+      case 'dark':
+        darkMode = true;
+        console.log(darkMode, 'dark');
+        break;
+      default:
+        darkMode = false;
+        console.log(darkMode, 'default');
+    }
     const chinese = checkIfChinese();
     myChart.setOption({
       title: {
