@@ -2,8 +2,8 @@ import type { SourceIterator } from 'tiddlywiki';
 import { IScriptAddon } from '../../../scriptAddon';
 import * as ECharts from '$:/plugins/Gk0Wk/echarts/echarts.min.js';
 
-const getFilterByDate = (date: string) =>
-  `[sameday:created[${date}]] [sameday:modified[${date}]]`;
+//  [sameday:modified[${date}]]
+const getFilterByDate = (date: string) => `[sameday:created[${date}]]`;
 const yearDates: Map<number, [string, string][]> = new Map();
 const dayTime = 3600 * 24 * 1000;
 const getData = (year: number, tiddlerSourceIterator: SourceIterator) => {
@@ -61,6 +61,7 @@ const GitHubHeatMapAddon: IScriptAddon<any> = {
     const filteredChangedTiddlers = Object.keys(changedTiddlers).filter(
       title => !(title.startsWith('$:/') || title.startsWith('Draft of')),
     );
+    // use real filtered (old and new to compare)
     return filteredChangedTiddlers.length ? true : false;
   },
   onUpdate: (myChart, _state, addonAttributes) => {
