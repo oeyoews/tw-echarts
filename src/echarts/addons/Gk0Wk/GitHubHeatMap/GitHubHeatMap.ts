@@ -77,7 +77,7 @@ const GitHubHeatMapAddon: IScriptAddon<any> = {
       if (count === 0) {
         return checkIfChinese()
           ? `${(ECharts as any).format.formatTime(
-              'yyyy年M月d日',
+              'yyyy 年 M 月 d 日',
               dateValue,
             )} 无条目。`
           : `${$tw.utils.formatDateString(
@@ -88,7 +88,7 @@ const GitHubHeatMapAddon: IScriptAddon<any> = {
       const p = $tw.utils.domMaker('p', {
         text: checkIfChinese()
           ? `${(ECharts as any).format.formatTime(
-              'yyyy年M月d日',
+              'yyyy 年 M 月 d 日',
               dateValue,
             )} 共有 ${count} 篇:`
           : `${$tw.utils.formatDateString(
@@ -138,8 +138,11 @@ const GitHubHeatMapAddon: IScriptAddon<any> = {
       }
       return cache;
     };
+    // const systemmode =
+    //   $tw.wiki.getTiddlerText('$:/info/darkmode') === 'yes' ? true : false;
     const systemmode =
-      $tw.wiki.getTiddlerText('$:/info/darkmode') === 'yes' ? true : false;
+      $tw.wiki.filterTiddlers('[{$:/palette}field:color-scheme[dark]]').length >
+      0;
     let darkMode: boolean;
     switch (addonAttributes.$theme) {
       case 'auto':

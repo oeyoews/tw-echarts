@@ -12,7 +12,7 @@ import * as ECharts from '$:/plugins/Gk0Wk/echarts/echarts.min.js';
 const echartWidgets: Set<EChartsWidget> = new Set();
 const Function_ = Function;
 if ($tw.browser) {
-  // 总算明白了，node启动时，这个会被调用一遍，在浏览器又会调用一遍
+  // 总算明白了，node 启动时，这个会被调用一遍，在浏览器又会调用一遍
   // 两边不是一个概念
   (globalThis as any).echarts = ECharts;
   try {
@@ -125,9 +125,12 @@ class EChartsWidget extends Widget {
         this.theme = 'dark';
         break;
       }
-      // NOTE: 如果你的tw主题支持自动切换dark/light,建议选择 auto
+      // NOTE: 如果你的 tw 主题支持自动切换 dark/light，建议选择 auto
       case 'auto': {
-        const theme = $tw.wiki.getTiddlerText('$:/info/darkmode') === 'yes' ? "dark" : undefined;
+        const theme =
+          $tw.wiki.getTiddlerText('$:/info/darkmode') === 'yes'
+            ? 'dark'
+            : undefined;
         this.theme = theme;
         break;
       }
@@ -199,10 +202,10 @@ class EChartsWidget extends Widget {
     }
     const mediaQuery = window.matchMedia?.('(prefers-color-scheme: dark)');
     if (this.theme === 'auto') {
-    mediaQuery.addEventListener('change', () => {
-      this.theme = mediaQuery.matches ? 'dark' : 'light';
-      this.rebuildInstance()
-    })
+      mediaQuery.addEventListener('change', () => {
+        this.theme = mediaQuery.matches ? 'dark' : 'light';
+        this.rebuildInstance();
+      });
     }
   }
 
@@ -215,10 +218,10 @@ class EChartsWidget extends Widget {
       this.timer = undefined;
       const oldAddonTitle = this.tiddlerTitle;
       const changedAttributes = this.computeAttributes();
-      let refreshFlag = 0; // 0: 不需要任何变更   1: 需要重新生成Option   2: 需要重新渲染
+      let refreshFlag = 0; // 0: 不需要任何变更   1: 需要重新生成 Option   2: 需要重新渲染
       // 先看一下参数的变化，这里分为几种：
-      // $tiddler变化的，说明要重新生成Option
-      // $theme、$fillSidebar 和 $renderer需要重新初始化实例
+      // $tiddler 变化的，说明要重新生成 Option
+      // $theme、$fillSidebar 和 $renderer 需要重新初始化实例
       // $class、$width 和 $height 只需要修改容器的尺寸就好了
       // 剩下的就是传给插件的参数了
       if ($tw.utils.count(changedAttributes) > 0) {
@@ -393,7 +396,7 @@ class EChartsWidget extends Widget {
     return oldOptions;
   }
 
-  // 初始化addon
+  // 初始化 addon
   initAddon() {
     try {
       if (this.text === undefined) {
