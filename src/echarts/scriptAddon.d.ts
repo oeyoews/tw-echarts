@@ -1,7 +1,5 @@
 import type { ECharts } from 'echarts';
-
 import type { Widget } from 'tiddlywiki';
-
 export interface IScriptAddon<
   StateType = any,
   AttributesType = Record<string, string>,

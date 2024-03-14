@@ -2,10 +2,10 @@
 import type { IParseTreeNode } from 'tiddlywiki';
 import type { IScriptAddon } from '../../../scriptAddon';
 
-// TODO: legend 默认只显示几个不显示全部, 暴露出参数配置
-// TODO: 默认显示caption: 因为此时已经缩放了, 不会很大
-// TODO: 判断路径数如果超过10，则不显示, 可以用来index
-// TODO: findicon 支持svg, iconify
+// TODO: legend 默认只显示几个不显示全部，暴露出参数配置
+// TODO: 默认显示 caption: 因为此时已经缩放了，不会很大
+// TODO: 判断路径数如果超过 10，则不显示，可以用来 index
+// TODO: findicon 支持 svg, iconify
 // TODO: 写一个 layout: none https://echarts.apache.org/examples/en/editor.html?c=graph-label-overlap
 const colors = [
   '#5470c6',
@@ -52,7 +52,7 @@ const attributes = new Set<string>([
   'focusBlur',
   'previewTemplate',
   'zoom',
-  'draggable'
+  'draggable',
 ]);
 const getPlatteColor = (name: string) =>
   $tw.wiki.renderText(
@@ -233,16 +233,15 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
       for (const title of $tw.wiki.filterTiddlers(
         addonAttributes.focussedTiddler,
       )) {
-
         if (title.startsWith('Draft')) return;
-         focussedTiddlers.add(title);
+        focussedTiddlers.add(title);
       }
     } else {
-      // BUG: 如果固定在pagetemplate上 新建tiddler, 会同时产生 Draft of 'xxx' by author 多个focussedTiddler, 难道是单引号的问题
+      // BUG: 如果固定在 pagetemplate 上 新建 tiddler, 会同时产生 Draft of 'xxx' by author 多个 focussedTiddler, 难道是单引号的问题
       const t = $tw.wiki.getTiddlerText('$:/temp/focussedTiddler');
       if (t) {
         if (t.startsWith('Draft')) return;
-          focussedTiddlers.add(t);
+        focussedTiddlers.add(t);
       }
     }
     if (focussedTiddlers.size === 0) {
@@ -685,9 +684,9 @@ const TheBrainAddon: IScriptAddon<ITheBrainState> = {
         {
           name: graphTitle,
           scaleLimit: {
-          min: 2,
-          max: 8
-        },
+            min: 2,
+            max: 8,
+          },
           type: 'graph',
           layout: 'force',
           top: 0,

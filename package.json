@@ -21,6 +21,7 @@
     "clean": "rimraf dist",
     "new": "tiddlywiki-plugin-dev new",
     "dev": "tiddlywiki-plugin-dev dev",
+    "format": "prettier --write src/echarts",
     "build": "npm run clean && tiddlywiki-plugin-dev build",
     "build:library": "npm run clean && tiddlywiki-plugin-dev build --library --output dist/library",
     "publish": "npm run clean && tiddlywiki-plugin-dev publish",
@@ -30,14 +31,13 @@
     "node": ">=16"
   },
   "devDependencies": {
-    "@modern-js/eslint-config": "^2.13.1",
-    "@modern-js/tsconfig": "^2.13.1",
-    "@types/echarts": "^4.9.16",
-    "@types/node": "^18.15.11",
-    "rimraf": "^5.0.0",
-    "ts-node": "^10.9.1",
+    "@modern-js/tsconfig": "^2.48.1",
+    "@types/echarts": "^4.9.22",
+    "@types/node": "^18.19.24",
+    "rimraf": "^5.0.5",
+    "ts-node": "^10.9.2",
     "tw5-typed": "^0.2.27",
-    "typescript": "^5.0.4"
+    "typescript": "^5.4.2"
   },
   "dependencies": {
     "prettier": "^3.2.5",
