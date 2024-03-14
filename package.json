@@ -7,8 +7,7 @@
     "url": "git+https://github.com/tiddly-gittly/tw-echarts.git"
   },
   "keywords": [
-    "TiddlyWiki5",
-    "Theme"
+    "TiddlyWiki5"
   ],
   "author": "Gk0Wk",
   "license": "MIT",
@@ -20,8 +19,6 @@
   "scripts": {
     "reset": "rimraf ./**/node_modules",
     "clean": "rimraf dist",
-    "prepare": "husky install",
-    "update": "npm-check-updates -u",
     "new": "tiddlywiki-plugin-dev new",
     "dev": "tiddlywiki-plugin-dev dev",
     "build": "npm run clean && tiddlywiki-plugin-dev build",
@@ -32,34 +29,19 @@
   "engines": {
     "node": ">=16"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "node --max_old_space_size=8192 ./node_modules/eslint/bin/eslint.js --fix --color --cache --quiet"
-    ],
-    "*.{js,jsx,mjs,mjsx,cjs,cjsx}": [
-      "node --max_old_space_size=8192 ./node_modules/eslint/bin/eslint.js --fix --color --cache --quiet"
-    ]
-  },
   "devDependencies": {
     "@modern-js/eslint-config": "^2.13.1",
     "@modern-js/tsconfig": "^2.13.1",
     "@types/echarts": "^4.9.16",
     "@types/node": "^18.15.11",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.1",
     "rimraf": "^5.0.0",
     "ts-node": "^10.9.1",
     "tw5-typed": "^0.2.27",
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "npm-check-updates": "^16.10.8",
-    "tiddlywiki": "^5.2.7",
+    "prettier": "^3.2.5",
+    "tiddlywiki": "^5.3.3",
     "tiddlywiki-plugin-dev": "^0.0.35"
   }
 }

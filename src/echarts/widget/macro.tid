@@ -1,5 +1,4 @@
 title: $:/plugins/Gk0Wk/echarts/macro
-type: text/vnd.tiddlywiki
 tags: $:/tags/Macro
 
 \define echarts(textortiddler,height:"300px",width:"100%",class:"gk0wk-echarts-body",theme:"auto",renderer:"canvas",fillSidebar:"true")
