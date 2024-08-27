@@ -198,7 +198,7 @@ const GitHubHeatMapAddon: IScriptAddon<any> = {
       },
       calendar: {
         top: 60,
-        left: 0,
+        left: 0, // 如果希望显示周几，调整这个距离即可
         right: 0,
         cellSize: 15,
         orient: 'horizontal',
@@ -216,6 +216,8 @@ const GitHubHeatMapAddon: IScriptAddon<any> = {
         dayLabel: {
           show: true,
           nameMap: chinese ? 'ZH' : 'EN',
+          // nameMap: ['日','一', '二', '三', '四', '五','六'].map(item => '周'+item),
+          firstDay: 1
         },
         monthLabel: {
           show: true,
@@ -234,6 +236,7 @@ const GitHubHeatMapAddon: IScriptAddon<any> = {
         calendarIndex: 0,
         data,
         itemStyle: { borderRadius: 3 },
+
       },
     } as any);
 
