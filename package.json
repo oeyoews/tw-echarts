@@ -41,7 +41,12 @@
   },
   "dependencies": {
     "prettier": "^3.2.5",
-    "tiddlywiki": "^5.3.3",
+    "tiddlywiki": "5.3.6",
     "tiddlywiki-plugin-dev": "^0.0.35"
+  },
+  "pnpm": {
+    "overrides": {
+      "tiddlywiki": "5.3.6"
+    }
   }
 }

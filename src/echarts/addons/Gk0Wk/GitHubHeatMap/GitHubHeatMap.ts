@@ -247,6 +247,11 @@ const GitHubHeatMapAddon: IScriptAddon<any> = {
       if (!value) return;
       const goto = new $tw.Story();
       const filter = `[sameday:created[${formattedDate}]!is[system]!has[draft.of]]`;
+      const tiddlers = $tw.wiki.filterTiddlers(filter);
+      if (tiddlers.length ==1) {
+        goto.navigateTiddler(tiddlers[0]);
+        return
+      }
       // @ts-ignore
       $tw.rootWidget.invokeActionString(
         '<$action-setfield $tiddler="$:/temp/advancedsearch" text="""' +
